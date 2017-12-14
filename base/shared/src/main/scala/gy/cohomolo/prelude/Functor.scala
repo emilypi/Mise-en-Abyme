@@ -1,6 +1,6 @@
 package gy.cohomolo.prelude
 
-class Functor {
+trait Functor[F[_]] {
 
-  val foo = basdf
+  def fmap[A, B](fa: F[A])(f: A => B: F[B]
 }
