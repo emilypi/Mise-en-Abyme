@@ -1,3 +1,10 @@
 package cohomolo.gy.prelude
 
-trait Comonad[W[_]] extends Cobind[W] with Functor[W]
+trait Comonad[F[_]] {
+  def cobind: Cobind[F]
+  def copoint[A](fa: F[A]): A
+}
+
+object Comonad extends ComonadSyntax {
+  def apply[F[_]](implicit F: Comonad[F]): Comonad[F] = F
+}

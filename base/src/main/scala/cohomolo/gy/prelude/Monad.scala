@@ -1,3 +1,10 @@
 package cohomolo.gy.prelude
 
-trait Monad[M[_]] extends Applicative[M] with Bind[M] with Apply[M]
+trait Monad[M[_]] {
+  def applicative: Applicative[M]
+  def bind: Bind[M]
+}
+
+object Monad extends MonadSyntax {
+  def apply[M[_]](implicit M: Monad[M]): Monad[M] = M
+}

@@ -1,5 +1,5 @@
 package cohomolo.gy.prelude
 
-trait Compose[F[_], G[_]] {
-  type λ[A] = F[G[A]]
+trait Compose[=>:[_, _]] {
+  def compose[A, B, C](f: B =>: C, g: A =>: B): (A =>: C)
 }
