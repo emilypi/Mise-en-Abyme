@@ -20,6 +20,8 @@ trait Prelude
   type Monad[M[_]] = typeclasses.Monad[M]
   type Comonad[F[_]] = typeclasses.Comonad[F]
   type Cobind[F[_]] = typeclasses.Cobind[F]
+//  type IsCovariant[F[_]] = typeclasses.IsCovariant[F]
+//  type IsContravariant[F[_]] = typeclasses.IsContravariant[F]
   type Show[A] = typeclasses.Show[A]
   type Semigroup[T] = typeclasses.Semigroup[T]
   type Monoid[T] = typeclasses.Monoid[T]
@@ -74,25 +76,29 @@ trait Prelude
   implicit def SemigroupOps[A](a: A)(
       implicit A: Semigroup[A]): SemigroupSyntax.OpsA[A] =
     new SemigroupSyntax.OpsA[A](a)
+
+//  def IsCovariant[F[_]](implicit F: IsCovariant[F]): IsCovariant[F] = F
+//  def IsContravariant[F[_]](implicit F: IsContravariant[F]): IsContravariant[F] = F
+
   // Base Data
   // =========
 
 //  type \/[L, R] = data.Disjunction.\/[L, R]
-//  type ===[A, B] = data.Is[A, B]
+//  type ===[A, B] = leibniz.Is[A, B]
 //  type <~<[-A, +B] = As[A, B]
 //  type >~>[+B, -A] = As[A, B]
 //  type Identity[A] = data.Identity[A]
 //  type Forget[A, B, C] = data.Forget[A, B, C]
 //
-//  val Forall : data.Forall.type = data.Forall
-//  val ∀      : data.Forall.type = data.Forall
-//  type Forall[F[_]]             = Forall.Forall[F]
-//  type ∀[F[_]]                  = Forall.Forall[F]
-//
-//  val Forall2 : data.Forall2.type = data.Forall2
-//  val ∀∀      : data.Forall2.type = data.Forall2
-//  type Forall2[F[_, _]]           = Forall2.Forall2[F]
-//  type ∀∀[F[_, _]]                = Forall2.Forall2[F]
+  val Forall: leibniz.Forall.type = leibniz.Forall
+  val ∀ : leibniz.Forall.type = leibniz.Forall
+  type Forall[F[_]] = Forall.Forall[F]
+  type ∀[F[_]] = Forall.Forall[F]
+
+  val Forall2: leibniz.Forall2.type = leibniz.Forall2
+  val ∀∀ : leibniz.Forall2.type = leibniz.Forall2
+  type Forall2[F[_, _]] = Forall2.Forall2[F]
+  type ∀∀[F[_, _]] = Forall2.Forall2[F]
 
 }
 

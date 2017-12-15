@@ -58,13 +58,15 @@ lazy val standardFeatures = scalacOptions ++= List(
   "utf-8", // Specify character encoding used by source files.
   "-explaintypes", // Explain type errors in more detail.
   "-feature", // Emit warning and location for usages of features that should be imported explicitly.
-  "-language:existentials", // Existential types (besides wildcard types) can be written and inferred
-  "-language:higherKinds", // Allow higher-kinded types
-  "-language:implicitConversions", // Allow definition of implicit functions called views
-  "-language:postfixOps", // Allow post fix operations
+  "-deprecation",
+  "-Xfuture",
+  "-Xsource:2.12",
+  "-language:implicitConversions",
+  "-language:higherKinds",
+  "-language:existentials",
+  "-language:postfixOps",
   "-unchecked", // Enable additional warnings where generated code depends on assumptions.
   "-Xcheckinit", // Wrap field accessors to throw an exception on uninitialized access.
-  "-Xfuture", // Turn on future language features.
   "-Xlint:adapted-args", // Warn if an argument list is modified to match the receiver.
   "-Xlint:constant", // Evaluation of a constant arithmetic expression results in an error.
   "-Xlint:doc-detached", // A Scaladoc comment appears to be detached from its element.
@@ -88,6 +90,5 @@ lazy val standardFeatures = scalacOptions ++= List(
   "-Ywarn-unused:implicits", // Warn if an implicit parameter is unused.
   "-Ywarn-unused:params", // Warn if a value parameter is unused.
   "-Ywarn-unused:patvars", // Warn if a variable bound in a pattern is unused.
-  "-Ywarn-value-discard",
-  "-Yno-predef"
+  "-Ywarn-value-discard"
 )
