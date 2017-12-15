@@ -24,24 +24,24 @@ lazy val standardSettings = List(
 
 lazy val root = (project in file("."))
   .settings(name := "mise-en-abyme")
-  .settings(standardSettings: _*)
   .aggregate(base, test, meta)
 
-lazy val base = (project in file("base"))
+lazy val base = project
+  .settings(moduleName := "base")
   .settings(name := "base")
   .settings(addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4"))
   .settings(libraryDependencies += "com.github.ghik" %% "silencer-lib" % "0.5")
   .settings(standardSettings ++ publishSettings: _*)
   .dependsOn(meta)
 
-lazy val test = (project in file("test"))
-  .settings(name := "test")
+lazy val test = project
+  .settings(moduleName := "test")
   .settings(addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4"))
   .settings(standardSettings ++ publishSettings: _*)
   .dependsOn(base)
 
-lazy val meta = (project in file("meta"))
-  .settings(name := "meta")
+lazy val meta = project
+  .settings(moduleName := "base")
   .settings(addCompilerPlugin("com.github.ghik" %% "silencer-plugin" % "0.5"))
   .settings(standardSettings ++ publishSettings: _*)
   .settings(
@@ -51,3 +51,4 @@ lazy val meta = (project in file("meta"))
       "com.github.ghik" %% "silencer-lib" % "0.5"
     )
   )
+

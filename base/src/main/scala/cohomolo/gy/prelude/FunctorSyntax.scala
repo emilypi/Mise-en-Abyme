@@ -2,7 +2,7 @@ package cohomolo.gy.prelude
 
 import scala.language.implicitConversions
 import scala.language.experimental.macros
-import gy.cohomolo.meta
+import cohomolo.gy.meta
 
 trait FunctorSyntax {
   implicit def functorOps[F[_], A](fa: F[A])(
