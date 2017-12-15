@@ -42,7 +42,7 @@ lazy val test = (project in file("test"))
   .settings(name := "test")
   .settings(addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4"))
   .settings(standardSettings ++ publishSettings: _*)
-  .dependsOn(meta, base)
+  .dependsOn(base)
 
 lazy val meta = (project in file("meta"))
   .settings(name := "meta")
