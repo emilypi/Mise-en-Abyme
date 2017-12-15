@@ -23,13 +23,9 @@ lazy val standardSettings = List(
 )
 
 lazy val root = (project in file("."))
-  .settings(name := "recursion-schemes")
+  .settings(name := "mise-en-abyme")
   .settings(standardSettings: _*)
-  .settings(unmanagedSourceDirectories in Compile += baseDirectory.value / "meta/shared/src")
-  .settings(unmanagedSourceDirectories in Compile += baseDirectory.value / "base/shared/src")
-  .settings(scalaSource in Test := baseDirectory.value / "test/shared/src")
   .aggregate(base, test, meta)
-  .dependsOn(base, test, meta)
 
 lazy val base = (project in file("base"))
   .settings(name := "base")
