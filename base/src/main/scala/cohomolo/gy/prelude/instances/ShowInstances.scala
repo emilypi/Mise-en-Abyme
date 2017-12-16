@@ -1,6 +1,6 @@
 package cohomolo.gy.prelude.instances
 
-import cohomolo.gy.prelude.typeclasses.{Contravariant, Show}
+import cohomolo.gy.prelude.typeclass.{Contravariant, Show}
 
 trait ShowInstances {
 

@@ -1,6 +1,6 @@
 package cohomolo.gy.prelude.impl
 
-import cohomolo.gy.prelude.typeclasses.Comonad
+import cohomolo.gy.prelude.typeclass.Comonad
 
 trait ComonadClass[F[_]]
     extends Comonad[F]

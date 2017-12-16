@@ -1,7 +1,8 @@
-package cohomolo.gy.prelude.syntax
+package cohomolo.gy
+package prelude
+package syntax
 
-import cohomolo.gy.meta
-import cohomolo.gy.prelude.typeclasses.Apply
+import cohomolo.gy.prelude.typeclass.Apply
 
 import scala.language.experimental.macros
 import scala.language.implicitConversions

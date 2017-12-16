@@ -1,4 +1,5 @@
-package cohomolo.gy.prelude
+package cohomolo.gy
+package prelude
 
 package object leibniz {
 
@@ -17,7 +18,10 @@ package object leibniz {
   type ~>[F[_], G[_]] = ∀[λ[α => F[α] => G[α]]]
   type ~~>[F[_, _], G[_, _]] = ∀∀[λ[(α, β) => F[α, β] => G[α, β]]]
 
-//  type \&/[A, B] = These.\&/[A, B]
-//  val \&/ : These.type = These
+  val Maybe: MaybeModule = MaybeImpl
+  type Maybe[A] = Maybe.Maybe[A]
+
+  val Maybe2: Maybe2Module = Maybe2Impl
+  type Maybe2[A, B] = Maybe2.Maybe2[A, B]
 
 }

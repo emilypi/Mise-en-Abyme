@@ -1,6 +1,6 @@
 package cohomolo.gy.prelude.instances
 
-import cohomolo.gy.prelude.typeclasses.{Apply, Const, Functor, Semigroup}
+import cohomolo.gy.prelude.typeclass.{Apply, Const, Functor, Semigroup}
 
 trait ConstInstances {
 

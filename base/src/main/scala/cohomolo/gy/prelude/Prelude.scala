@@ -1,30 +1,35 @@
-package cohomolo.gy.prelude
+package cohomolo.gy
+package prelude
 
-import cohomolo.gy.prelude
-import cohomolo.gy.prelude.syntax._
-
+import syntax._
+import leibniz._
 import scala.language.implicitConversions
 
 trait Prelude
-    extends prelude.functions.BindFunctions
-    with prelude.functions.FunctorFunctions
-    with prelude.functions.CobindFunctions {
+    extends functions.DisjunctionFunctions
+    with leibniz.ForallSyntax
+    with leibniz.Forall2Syntax
+    with leibniz.IdentityTypes
+//  with leibniz.MaybePrelude
+    with functions.BindFunctions
+    with functions.FunctorFunctions {
 
   // Base Class
   // ==========
-  type Applicative[F[_]] = typeclasses.Applicative[F]
-  type Apply[F[_]] = typeclasses.Apply[F]
-  type Bind[M[_]] = typeclasses.Bind[M]
-  type Compose[P[_, _]] = typeclasses.Compose[P]
-  type Functor[F[_]] = typeclasses.Functor[F]
-  type Monad[M[_]] = typeclasses.Monad[M]
-  type Comonad[F[_]] = typeclasses.Comonad[F]
-  type Cobind[F[_]] = typeclasses.Cobind[F]
-//  type IsCovariant[F[_]] = typeclasses.IsCovariant[F]
-//  type IsContravariant[F[_]] = typeclasses.IsContravariant[F]
-  type Show[A] = typeclasses.Show[A]
-  type Semigroup[T] = typeclasses.Semigroup[T]
-  type Monoid[T] = typeclasses.Monoid[T]
+  type Applicative[F[_]] = typeclass.Applicative[F]
+  type Apply[F[_]] = typeclass.Apply[F]
+  type Bind[M[_]] = typeclass.Bind[M]
+  type Compose[P[_, _]] = typeclass.Compose[P]
+  type Functor[F[_]] = typeclass.Functor[F]
+  type Monad[M[_]] = typeclass.Monad[M]
+  type Category[=>:[_, _]] = typeclass.Category[=>:]
+  type Comonad[F[_]] = typeclass.Comonad[F]
+  type Cobind[F[_]] = typeclass.Cobind[F]
+//  type IsCovariant[F[_]] = typeclass.IsCovariant[F]
+//  type IsContravariant[F[_]] = typeclass.IsContravariant[F]
+  type Show[A] = typeclass.Show[A]
+  type Semigroup[T] = typeclass.Semigroup[T]
+  type Monoid[T] = typeclass.Monoid[T]
 
   def Applicative[F[_]](implicit F: Applicative[F]): Applicative[F] = F
   def Apply[F[_]](implicit F: Apply[F]): Apply[F] = F
@@ -32,8 +37,11 @@ trait Prelude
   def Compose[P[_, _]](implicit P: Compose[P]): Compose[P] = P
   def Functor[F[_]](implicit F: Functor[F]): Functor[F] = F
   def Monad[M[_]](implicit M: Monad[M]): Monad[M] = M
+  def Category[=>:[_, _]](implicit P: Category[=>:]): Category[=>:] = P
   def Comonad[F[_]](implicit F: Comonad[F]): Comonad[F] = F
   def Cobind[F[_]](implicit F: Cobind[F]): Cobind[F] = F
+//  def IsCovariant[F[_]](implicit F: IsCovariant[F]): IsCovariant[F] = F
+//  def IsContravariant[F[_]](implicit F: IsContravariant[F]): IsContravariant[F] = F
   def Show[A](implicit A: Show[A]): Show[A] = A
   def Semigroup[T](implicit T: Semigroup[T]): Semigroup[T] = T
   def Monoid[T](implicit T: Monoid[T]): Monoid[T] = T
@@ -62,6 +70,11 @@ trait Prelude
       implicit F: Functor[F]): FunctorSyntax.Ops[F, A] =
     new FunctorSyntax.Ops(fa)
 
+  // MaybeSyntax
+  implicit class POptionAsMaybe[A](oa: Option[A]) {
+    def asMaybe: Maybe[A] = Maybe.fromOption(oa)
+  }
+
   implicit def CobindOps[F[_], A](fa: F[A])(
       implicit F: Cobind[F]): CobindSyntax.Ops[F, A] =
     new CobindSyntax.Ops(fa)
@@ -77,19 +90,15 @@ trait Prelude
       implicit A: Semigroup[A]): SemigroupSyntax.OpsA[A] =
     new SemigroupSyntax.OpsA[A](a)
 
-//  def IsCovariant[F[_]](implicit F: IsCovariant[F]): IsCovariant[F] = F
-//  def IsContravariant[F[_]](implicit F: IsContravariant[F]): IsContravariant[F] = F
-
   // Base Data
   // =========
 
-//  type \/[L, R] = data.Disjunction.\/[L, R]
+  type \/[L, R] = leibniz.Disjunction.\/[L, R]
 //  type ===[A, B] = leibniz.Is[A, B]
-//  type <~<[-A, +B] = As[A, B]
-//  type >~>[+B, -A] = As[A, B]
-//  type Identity[A] = data.Identity[A]
-//  type Forget[A, B, C] = data.Forget[A, B, C]
-//
+//  type <~<[-A, +B] = leibniz.As[A, B]
+//  type >~>[+B, -A] = leibniz.As[A, B]
+  type Identity[A] = leibniz.Identity[A]
+
   val Forall: leibniz.Forall.type = leibniz.Forall
   val ∀ : leibniz.Forall.type = leibniz.Forall
   type Forall[F[_]] = Forall.Forall[F]

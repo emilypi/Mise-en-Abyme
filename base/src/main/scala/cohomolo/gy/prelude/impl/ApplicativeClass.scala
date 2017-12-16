@@ -1,7 +1,7 @@
 package cohomolo.gy.prelude.impl
 
 import cohomolo.gy.prelude._
-import cohomolo.gy.prelude.typeclasses.{Applicative, Apply, Functor}
+import cohomolo.gy.prelude.typeclass.{Applicative, Apply, Functor}
 
 trait ApplicativeClass[F[_]] extends Applicative[F] with ApplyClass[F] {
   final def applicative: Applicative[F] = this

@@ -1,7 +1,7 @@
 package cohomolo.gy.prelude.impl
 
 import cohomolo.gy.prelude._
-import cohomolo.gy.prelude.typeclasses.{Apply, Bind, Functor}
+import cohomolo.gy.prelude.typeclass.{Apply, Bind, Functor}
 
 trait BindClass[M[_]] extends Bind[M] with ApplyClass[M] {
   final def bind: Bind[M] = this

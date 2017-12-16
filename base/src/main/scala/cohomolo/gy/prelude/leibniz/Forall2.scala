@@ -1,4 +1,6 @@
-package cohomolo.gy.prelude.leibniz
+package cohomolo.gy
+package prelude
+package leibniz
 
 import scala.language.implicitConversions
 

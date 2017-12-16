@@ -1,7 +1,8 @@
 package cohomolo.gy.prelude.instances
 
 import cohomolo.gy.prelude.impl.MonadClass
-import cohomolo.gy.prelude.typeclasses.{Identity, Monad}
+import cohomolo.gy.prelude.leibniz.Identity
+import cohomolo.gy.prelude.typeclass.Monad
 
 trait IdentityInstances {
   implicit val monad: Monad[Identity] = new MonadClass[Identity] {

@@ -30,6 +30,7 @@ lazy val base = project
   .settings(moduleName := "base")
   .settings(name := "base")
   .settings(addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4"))
+  .settings(addCompilerPlugin("com.github.tomasmikula" %% "pascal" % "0.1"))
   .settings(libraryDependencies += "com.github.ghik" %% "silencer-lib" % "0.5")
   .settings(standardFeatures ++ standardSettings ++ publishSettings: _*)
   .dependsOn(meta)
@@ -88,7 +89,6 @@ lazy val standardFeatures = scalacOptions ++= List(
   "-Ywarn-nullary-unit", // Warn when nullary methods return Unit.
   "-Ywarn-numeric-widen", // Warn when numerics are widened.
   "-Ywarn-unused:implicits", // Warn if an implicit parameter is unused.
-  "-Ywarn-unused:params", // Warn if a value parameter is unused.
   "-Ywarn-unused:patvars", // Warn if a variable bound in a pattern is unused.
   "-Ywarn-value-discard"
 )

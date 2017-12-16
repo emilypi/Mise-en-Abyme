@@ -1,7 +1,7 @@
 package cohomolo.gy.prelude.instances
 
 import cohomolo.gy.prelude.impl.MonoidClass
-import cohomolo.gy.prelude.typeclasses.Monoid
+import cohomolo.gy.prelude.typeclass.Monoid
 
 trait MonoidInstances {
 

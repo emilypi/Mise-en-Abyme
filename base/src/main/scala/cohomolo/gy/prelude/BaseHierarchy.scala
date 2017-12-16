@@ -1,6 +1,6 @@
 package cohomolo.gy.prelude
 
-import cohomolo.gy.prelude.typeclasses._
+import cohomolo.gy.prelude.typeclass._
 
 class BaseHierarchy extends BaseHierarchy.BH0
 

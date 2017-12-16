@@ -1,7 +1,8 @@
-package cohomolo.gy.prelude.syntax
+package cohomolo.gy
+package prelude
+package syntax
 
-import cohomolo.gy.meta
-import cohomolo.gy.prelude.typeclasses.Semigroup
+import cohomolo.gy.prelude.typeclass.Semigroup
 import com.github.ghik.silencer.silent
 
 import scala.language.experimental.macros

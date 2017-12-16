@@ -1,6 +1,6 @@
 package cohomolo.gy.prelude.impl
 
-import cohomolo.gy.prelude.typeclasses.Cobind
+import cohomolo.gy.prelude.typeclass.Cobind
 
 trait CobindClass[F[_]] extends Cobind[F] with FunctorClass[F] {
   final def cobind: Cobind[F] = this
