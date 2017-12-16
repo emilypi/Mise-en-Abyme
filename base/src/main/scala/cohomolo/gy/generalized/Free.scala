@@ -1,4 +1,16 @@
 package cohomolo.gy
 package generalized
 
-class Free {}
+import prelude.leibniz.Disjunction.\/
+
+trait FreeModule {
+  type Free[F[_], A]
+
+  def runFree[F[_], A](f: Free[F, A]): A \/ F[generalized.Free[F, A]]
+}
+
+object FreeImpl extends FreeModule {
+  type Free[F[_], A] = A \/ F[generalized.Free[F, A]]
+
+  def runFree[F[_], A](f: Free[F, A]): A \/ F[generalized.Free[F, A]] = f
+}

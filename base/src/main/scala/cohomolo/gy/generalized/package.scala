@@ -1,7 +1,5 @@
 package cohomolo.gy
 
-import cohomolo.gy.prelude.typeclass.Functor
-
 package object generalized {
 
   type Algebra[F[_], A] = F[A] => A
@@ -17,4 +15,10 @@ package object generalized {
 
   val Cofix: CofixModule = CofixImpl
   type Cofix[F[_]] = Cofix.Cofix[F]
+
+//  val Cofree: CofreeModule = CofreeImpl
+//  type Cofree[F[_], A] = Cofree.Cofree[F, A]
+
+  val Free: FreeModule = FreeImpl
+  type Free[F[_], A] = Free.Free[F, A]
 }
