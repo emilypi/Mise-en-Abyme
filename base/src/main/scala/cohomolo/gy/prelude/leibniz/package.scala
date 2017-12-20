@@ -16,6 +16,7 @@ package object leibniz {
   type ∀∀[F[_, _]] = Forall2[F]
 
   type ~>[F[_], G[_]] = ∀[λ[α => F[α] => G[α]]]
+
   type ~~>[F[_, _], G[_, _]] = ∀∀[λ[(α, β) => F[α, β] => G[α, β]]]
 
   val Maybe: MaybeModule = MaybeImpl

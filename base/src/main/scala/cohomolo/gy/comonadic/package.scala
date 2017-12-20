@@ -1,5 +1,7 @@
 package cohomolo.gy
 
+import cohomolo.gy.prelude.leibniz.∀
+
 package object comonadic {
 
   type GAlgebra[F[_], W[_], A] = F[W[A]] => A

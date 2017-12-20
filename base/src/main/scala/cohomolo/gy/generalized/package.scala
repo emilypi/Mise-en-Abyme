@@ -10,15 +10,12 @@ package object generalized {
   val Fix: FixModule = FixImpl
   type Fix[F[_]] = Fix.Fix[F]
 
-  val Mu: MuModule = MuImpl
-  type Mu[F[_]] = Mu.Mu[F]
-
-  val Cofix: CofixModule = CofixImpl
-  type Cofix[F[_]] = Cofix.Cofix[F]
-
-//  val Cofree: CofreeModule = CofreeImpl
-//  type Cofree[F[_], A] = Cofree.Cofree[F, A]
+  val Cofree: CofreeModule = CofreeImpl
+  type Cofree[F[_], A] = Cofree.Cofree[F, A]
 
   val Free: FreeModule = FreeImpl
   type Free[F[_], A] = Free.Free[F, A]
+
+//  val IStream: IStreamModule = IStreamImpl
+//  type IStream[A] = IStream.IStream[A]
 }
