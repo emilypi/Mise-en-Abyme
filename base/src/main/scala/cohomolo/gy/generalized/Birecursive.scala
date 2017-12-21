@@ -1,4 +1,4 @@
 package cohomolo.gy
 package generalized
 
-class Birecursive {}
+trait Birecursive[A] extends Corecursive[A] with Recursive[A]

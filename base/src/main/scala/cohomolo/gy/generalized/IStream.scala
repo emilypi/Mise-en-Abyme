@@ -16,8 +16,6 @@ object IStream {
   def scons[A](a: => A, as: => IStream[A]): IStream[A] =
     ICons(Inductive.apply(a), Coinductive.apply(Inf(as)))
 
-  def #:[A](a: => A, as: => IStream[A]): IStream[A] = scons(a, as)
-
   def foldl[A, B](as: => IStream[A], z: => B)(f: (=> B) => A => B): B =
     as match {
       case ICons(a, t) =>

@@ -1,4 +1,6 @@
 package cohomolo.gy
 package generalized
 
-class Based {}
+trait Based[T] {
+  type Base[A]
+}

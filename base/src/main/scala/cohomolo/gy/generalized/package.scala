@@ -15,7 +15,6 @@ package object generalized {
 
   val Free: FreeModule = FreeImpl
   type Free[F[_], A] = Free.Free[F, A]
-
 //  val IStream: IStreamModule = IStreamImpl
 //  type IStream[A] = IStream.IStream[A]
 }
