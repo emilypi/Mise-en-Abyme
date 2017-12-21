@@ -11,7 +11,7 @@ sealed trait Maybe2Module {
     */
   type Maybe2[A, B]
 
-  def just2[A, B](a: A, b: B): Maybe2[A, B]
+  def just2[A, B](a: => A, b: => B): Maybe2[A, B]
   def empty2[A, B]: Maybe2[A, B]
 
 //  implicit def isCovariant_1[B]: IsCovariant[Maybe2[?, B]]
@@ -42,7 +42,7 @@ final class Just2Extractor[A, B] private[leibniz] (
 private[leibniz] object Maybe2Impl extends Maybe2Module {
   type Maybe2[A, B] = Option2[A, B]
 
-  def just2[A, B](a: A, b: B): Maybe2[A, B] = Some2(a, b)
+  def just2[A, B](a: => A, b: => B): Maybe2[A, B] = Some2(a, b)
   def empty2[A, B]: Maybe2[A, B] = None2
 
 //  implicit def isCovariant_1[B]: IsCovariant[Maybe2[?, B]] = IsCovariant.scalaCovariant[Option2[+?, B]]
