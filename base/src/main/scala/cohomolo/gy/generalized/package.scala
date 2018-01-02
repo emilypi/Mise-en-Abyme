@@ -1,5 +1,7 @@
 package cohomolo.gy
 
+import cohomolo.gy.generalized.Cofree
+
 package object generalized {
 
   type Algebra[F[_], A] = F[A] => A
@@ -10,11 +12,10 @@ package object generalized {
   val Fix: FixModule = FixImpl
   type Fix[F[_]] = Fix.Fix[F]
 
-  val Cofree: CofreeModule = CofreeImpl
+  val Cofree: CofreeFunctions = CofreeImpl
   type Cofree[F[_], A] = Cofree.Cofree[F, A]
 
   val Free: FreeModule = FreeImpl
   type Free[F[_], A] = Free.Free[F, A]
 
-  type IStream[A] = Cofree[(A, ?), A]
 }

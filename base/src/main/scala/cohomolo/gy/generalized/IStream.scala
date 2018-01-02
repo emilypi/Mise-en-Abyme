@@ -1,27 +1,27 @@
 package cohomolo.gy
 package generalized
 
-import cohomolo.gy.prelude.control.{Coinductive, Inductive, Inf}
+import cohomolo.gy.prelude.control.Inf
+import cohomolo.gy.prelude.leibniz.Maybe2
 
-//sealed abstract class IStream[A]
-//final case class ICons[A](a: Inductive[A], t: Coinductive[IStream[A]])
-//    extends IStream[A] {
-//  def extract: A = a.value
-//}
-//sealed abstract case class IEmpty[A]() extends IStream[A]
+sealed abstract class IStreamFunctions[A] {
+  type IStream[A]
+
+  def empty[A]: IStream[A]
+  def scons[A](a: => A, as: => IStream[A]): IStream[A]
+  def foldl[A, B](as: => IStream[A], z: => B)(f: (=> B) => A => B): B
+  def sappend[A](as: IStream[A])(bs: IStream[A]): IStream[A]
+
+}
+
+//private[generalized] object IStream extends IStreamFunctions {
+//  type IStream[A] = generalized.Cofree[(A, ?), A]
 //
-//object IStream {
+//  override def empty[A]: Cofree[Tuple2[A, _], A] = ???
 //
-//  def scons[A](a: => A, as: => IStream[A]): IStream[A] =
-//    ICons(Inductive.apply(a), Coinductive.apply(Inf(as)))
+//  override def scons[A](a: => A, as: => IStream[A]): IStream[A] = ???
 //
-//  def foldl[A, B](as: => IStream[A], z: => B)(f: (=> B) => A => B): B =
-//    as match {
-//      case ICons(a, t) =>
-//        foldl(t.force, f(z)(a.value))(f)
-//      case IEmpty() => z
-//    }
+//  override def foldl[A, B](as: => Cofree[Tuple2[A, _], A], z: => B)(f: B => A => B): B = ???
 //
-//  def #:::[A](as: IStream[A])(bs: IStream[A]): IStream[A] =
-//    foldl(bs, new IEmpty[A]() {}: IStream[A])(acc => a => scons(a, acc))
+//  override def sappend[A](as: Cofree[Tuple2[A, _], A])(bs: Cofree[Tuple2[A, _], A]): Cofree[Tuple2[A, _], A] = ???
 //}
