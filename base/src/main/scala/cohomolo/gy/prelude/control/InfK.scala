@@ -1,7 +1,5 @@
 package cohomolo.gy.prelude.control
 
-import cohomolo.gy.prelude.typeclass.Applicative
-
 sealed abstract class BoolK
 final class TrueK[F[_]] private () extends BoolK
 final class FalseK[F[_]] private () extends BoolK
@@ -14,6 +12,7 @@ object BoolK {
 final class InfK[+F[_], A] private (thunk: () => F[A]) {
   lazy val force: F[A] = thunk()
 }
+
 object InfK {
   def apply[F[_], A](a: => F[A]): InfK[F, A] = new InfK(() => a)
 }
