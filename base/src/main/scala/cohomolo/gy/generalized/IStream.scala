@@ -1,27 +1,35 @@
 package cohomolo.gy
 package generalized
 
-import cohomolo.gy.prelude.control.Inf
+import cohomolo.gy.prelude.control.{Coinductive, Inf}
 import cohomolo.gy.prelude.leibniz.Maybe2
 
-sealed abstract class IStreamFunctions[A] {
+sealed abstract class IStreamModule {
   type IStream[A]
 
   def empty[A]: IStream[A]
-  def scons[A](a: => A, as: => IStream[A]): IStream[A]
-  def foldl[A, B](as: => IStream[A], z: => B)(f: (=> B) => A => B): B
-  def sappend[A](as: IStream[A])(bs: IStream[A]): IStream[A]
-
+  def scons[A](a: => A)(as: => generalized.IStream[A]): IStream[A]
+  def uncons[A](as: IStream[A]): A
+  def smap[A, B](as: => IStream[A])(f: A => B)(
+      g: generalized.IStream[A] => generalized.IStream[B]): IStream[B]
 }
 
-//private[generalized] object IStream extends IStreamFunctions {
-//  type IStream[A] = generalized.Cofree[(A, ?), A]
-//
-//  override def empty[A]: Cofree[Tuple2[A, _], A] = ???
-//
-//  override def scons[A](a: => A, as: => IStream[A]): IStream[A] = ???
-//
-//  override def foldl[A, B](as: => Cofree[Tuple2[A, _], A], z: => B)(f: B => A => B): B = ???
-//
-//  override def sappend[A](as: Cofree[Tuple2[A, _], A])(bs: Cofree[Tuple2[A, _], A]): Cofree[Tuple2[A, _], A] = ???
-//}
+private[generalized] object IStreamImpl extends IStreamModule {
+  type IStream[A] = Maybe2[A, Coinductive[generalized.IStream[A]]]
+
+  def empty[A]: IStream[A] =
+    Maybe2.empty2[A, Coinductive[generalized.IStream[A]]]
+
+  def scons[A](a: => A)(as: => generalized.IStream[A]): IStream[A] =
+    Maybe2.just2(a, Coinductive.apply(Inf.apply(as)))
+
+  def uncons[A](as: IStream[A]): A =
+    Maybe2.Just2.unapply[A, Coinductive[generalized.IStream[A]]](as)._1
+
+  def smap[A, B](as: => IStream[A])(f: A => B)(
+      g: generalized.IStream[A] => generalized.IStream[B]): IStream[B] = {
+    lazy val lr =
+      Maybe2.Just2.unapply[A, Coinductive[generalized.IStream[A]]](as)
+    Maybe2.just2(f(lr._1), Coinductive.apply(Inf.apply(g(lr._2.force))))
+  }
+}
