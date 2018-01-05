@@ -9,18 +9,22 @@ sealed abstract class CofreeFunctions {
 
   def runCofree[F[_], A](f: Cofree[F, A]): F[generalized.Cofree[F, A]]
 
-  def wrapCofree[F[_], A](a: A)(f: =>F[generalized.Cofree[F, A]]): Cofree[F, A]
+  def wrapCofree[F[_], A](a: =>A)(
+    f: =>F[generalized.Cofree[F, A]]
+  ): Cofree[F, A]
 }
 
 private[generalized] object CofreeImpl extends CofreeFunctions {
-  type Cofree[F[_], A] = (A, Coinductive[F[generalized.Cofree[F, A]]])
+
+  type Cofree[F[_], A] =
+    (Coinductive[A], Coinductive[F[generalized.Cofree[F, A]]])
 
   def runCofree[F[_], A](f: Cofree[F, A]): F[generalized.Cofree[F, A]] =
     f._2.force
 
   def wrapCofree[F[_], A](
-    a: A
+    a: =>A
   )(f: =>F[generalized.Cofree[F, A]]): Cofree[F, A] =
-    (a, Coinductive.apply(Inf.apply(f)))
+    (Coinductive(Inf(a)), Coinductive(Inf(f)))
 
 }
