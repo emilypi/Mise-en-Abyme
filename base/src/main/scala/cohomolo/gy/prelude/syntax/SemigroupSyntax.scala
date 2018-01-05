@@ -1,5 +1,7 @@
 package cohomolo.gy
+
 package prelude
+
 package syntax
 
 import cohomolo.gy.prelude.typeclass.Semigroup
@@ -14,7 +16,8 @@ trait SemigroupSyntax {
 }
 
 object SemigroupSyntax {
+
   class OpsA[A: Semigroup](@silent a: A) {
-    def append(f: => A): A = macro meta.Ops.fa_1
+    def append(f: =>A): A = macro meta.Ops.fa_1
   }
 }

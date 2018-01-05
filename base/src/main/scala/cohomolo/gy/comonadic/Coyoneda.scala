@@ -1,4 +1,5 @@
 package cohomolo.gy
+
 package comonadic
 
 trait Coyoneda[F[_], A] {

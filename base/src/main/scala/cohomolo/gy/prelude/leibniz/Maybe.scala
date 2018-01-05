@@ -1,5 +1,7 @@
 package cohomolo.gy
+
 package prelude
+
 package leibniz
 
 import Prelude._
@@ -10,7 +12,7 @@ import typeclass.Show
 
 sealed trait MaybeModule extends MaybeFunctions {
 
-  def fold[A, B](ma: Maybe[A])(f: A => B, b: => B): B =
+  def fold[A, B](ma: Maybe[A])(f: A => B, b: =>B): B =
     toOption(ma).fold(b)(f)
 
   /* typeclass instances */
@@ -31,9 +33,10 @@ private[leibniz] object MaybeImpl extends MaybeModule {
 
   def empty[A]: Maybe[A] = None
   def just[A](a: A): Maybe[A] = Some(a)
+
   def maybe[A, B](n: B)(f: A => B): Maybe[A] => B = _ match {
     case Some(a) => f(a)
-    case None    => n
+    case None => n
   }
   def fromOption[A](oa: Option[A]): Maybe[A] = oa
   def toOption[A](ma: Maybe[A]): Option[A] = ma
@@ -43,7 +46,7 @@ private[leibniz] object MaybeImpl extends MaybeModule {
 
   def show[A](implicit A: Show[A]): Show[Maybe[A]] = {
     case Some(a) => s"Just(${A.show(a)})"
-    case None    => "Empty"
+    case None => "Empty"
   }
 
   private val instance =
@@ -52,7 +55,7 @@ private[leibniz] object MaybeImpl extends MaybeModule {
       override def ap[A, B](ma: Maybe[A])(mf: Maybe[A => B]): Maybe[B] =
         mf match {
           case Some(f) => ma.map(f)
-          case None    => None
+          case None => None
         }
 
       override def bind[A, B](ma: Maybe[A])(f: A => Maybe[B]): Maybe[B] =

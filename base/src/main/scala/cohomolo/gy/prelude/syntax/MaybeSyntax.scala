@@ -1,5 +1,7 @@
 package cohomolo.gy
+
 package prelude
+
 package syntax
 
 import leibniz.Maybe

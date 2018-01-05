@@ -1,5 +1,7 @@
 package cohomolo.gy
+
 package prelude
+
 package syntax
 
 import cohomolo.gy.prelude.typeclass.Show
@@ -14,6 +16,7 @@ trait ShowSyntax {
 }
 
 object ShowSyntax {
+
   class Ops[A](@silent self: A)(implicit @silent A: Show[A]) {
     def show: String = macro meta.Ops.f_0
   }

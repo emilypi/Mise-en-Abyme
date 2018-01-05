@@ -7,6 +7,7 @@ trait CobindClass[F[_]] extends Cobind[F] with FunctorClass[F] {
 }
 
 object CobindClass {
+
   trait Cobind[F[_]] extends Alt[Cobind[F]] with CobindClass[F] {
 
     override def cojoin[A](fa: F[A]): F[F[A]] = cobind(fa)(a => a)

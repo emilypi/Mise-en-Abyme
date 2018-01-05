@@ -1,10 +1,12 @@
 package cohomolo.gy
+
 package prelude
+
 package instances
 
 import typeclass._
 import impl._
-import leibniz.Disjunction.{\/, -\/, \/-}
+import leibniz.Disjunction.{ \/, -\/, \/- }
 
 trait DisjunctionInstances {
   implicit def monad[L]: Monad[L \/ ?] = new MonadClass.Template[L \/ ?] {
@@ -23,7 +25,7 @@ trait DisjunctionInstances {
   }
 
   implicit def show[L, R](implicit L: Show[L], R: Show[R]): Show[L \/ R] = {
-    case -\/(left)  => s"""-\/(${L.show(left)})"""
+    case -\/(left) => s"""-\/(${L.show(left)})"""
     case \/-(right) => s"""\/-(${R.show(right)})"""
   }
 }

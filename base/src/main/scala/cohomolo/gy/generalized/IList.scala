@@ -1,4 +1,5 @@
 package cohomolo.gy
+
 package generalized
 
 import cohomolo.gy.prelude.leibniz.Maybe2

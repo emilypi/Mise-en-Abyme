@@ -1,4 +1,5 @@
 package cohomolo.gy
+
 package generalized
 
 trait Based[T] {

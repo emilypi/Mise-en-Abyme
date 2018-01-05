@@ -10,6 +10,7 @@ trait ComonadClass[F[_]]
 }
 
 object ComonadClass {
+
   trait Cobind[F[_]] extends Alt[Cobind[F]] with ComonadClass[F] {
     override def copoint[A](fa: F[A]): A
 

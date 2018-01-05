@@ -1,8 +1,10 @@
 package cohomolo.gy
+
 package prelude
+
 package functions
 
-import leibniz.Disjunction.{\/, \/-, -\/}
+import leibniz.Disjunction.{ \/, \/-, -\/ }
 
 trait DisjunctionFunctions {
   @inline def left[L, R](value: L): leibniz.Disjunction[L, R] = -\/(value)

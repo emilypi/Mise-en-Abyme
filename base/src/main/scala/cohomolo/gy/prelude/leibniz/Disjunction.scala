@@ -1,12 +1,14 @@
 package cohomolo.gy
+
 package prelude
+
 package leibniz
 
 import instances.DisjunctionInstances
 import cohomolo.gy.prelude.functions.DisjunctionFunctions
 
 sealed trait Disjunction[L, R] {
-  import Disjunction.{-\/, \/-}
+  import Disjunction.{ -\/, \/- }
   final def fold[A](la: L => A)(ra: R => A): A = this match {
     case -\/(l) => la(l)
     case \/-(r) => ra(r)

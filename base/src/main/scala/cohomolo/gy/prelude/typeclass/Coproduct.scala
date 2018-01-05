@@ -1,5 +1,7 @@
 package cohomolo.gy
+
 package prelude
+
 package typeclass
 
 trait Coproduct[F[_], G[_]] {

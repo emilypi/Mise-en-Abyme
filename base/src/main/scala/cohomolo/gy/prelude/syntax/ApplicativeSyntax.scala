@@ -1,5 +1,7 @@
 package cohomolo.gy
+
 package prelude
+
 package syntax
 
 import cohomolo.gy.prelude.typeclass.Applicative
@@ -14,6 +16,7 @@ trait ApplicativeSyntax {
 }
 
 object ApplicativeSyntax {
+
   class OpsA[A](@silent a: A) {
     def pure[F[_]: Applicative]: F[A] = macro meta.IdOps.id_1
   }

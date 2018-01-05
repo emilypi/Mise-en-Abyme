@@ -1,5 +1,7 @@
 package cohomolo.gy
+
 package prelude
+
 package syntax
 
 import cohomolo.gy.prelude.typeclass.Cobind
@@ -14,6 +16,7 @@ trait CobindSyntax {
 }
 
 object CobindSyntax {
+
   class Ops[F[_]: Cobind, A](@silent fa: F[A]) {
     def cobind[B](f: F[A] => B): F[B] = macro meta.Ops.f_1
   }

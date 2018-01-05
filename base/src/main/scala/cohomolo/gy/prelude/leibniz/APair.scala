@@ -1,5 +1,7 @@
 package cohomolo.gy
+
 package prelude
+
 package leibniz
 
 /**
@@ -18,18 +20,23 @@ sealed abstract class BoundedAPair[U, F[_ <: U], G[_ <: U]] {
 }
 
 object BoundedAPair {
-  def apply[U, F[_ <: U], G[_ <: U], A <: U](fa: F[A],
-                                             ga: G[A]): BoundedAPair[U, F, G] =
+
+  def apply[U, F[_ <: U], G[_ <: U], A <: U](
+    fa: F[A],
+    ga: G[A]
+  ): BoundedAPair[U, F, G] =
     new BoundedAPair[U, F, G] { type Pivot = A; val _1 = fa; val _2 = ga }
 
   def unapply[U, F[_ <: U], G[_ <: U]](
-      p: BoundedAPair[U, F, G]): Option[(F[p.Pivot], G[p.Pivot])] =
+    p: BoundedAPair[U, F, G]
+  ): Option[(F[p.Pivot], G[p.Pivot])] =
     Some((p._1, p._2))
 
   /** Defer specifying `A`, so that it could possibly be inferred. */
   def of[U, F[_ <: U], G[_ <: U]]: Builder[U, F, G] = new Builder[U, F, G]
 
   class Builder[U, F[_ <: U], G[_ <: U]] {
+
     def apply[A <: U](fa: F[A], ga: G[A]): BoundedAPair[U, F, G] =
       BoundedAPair[U, F, G, A](fa, ga)
   }

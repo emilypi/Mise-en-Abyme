@@ -1,9 +1,11 @@
 package cohomolo.gy
+
 package prelude
+
 package syntax
 
 import leibniz.Disjunction
-import leibniz.Disjunction.{\/, \/-, -\/}
+import leibniz.Disjunction.{ \/, \/-, -\/ }
 
 trait DisjunctionSyntax {
   implicit class ToEitherOps[A](a: A) {

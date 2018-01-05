@@ -1,4 +1,5 @@
 package cohomolo.gy
+
 package prelude
 
 import syntax._
@@ -51,23 +52,27 @@ trait Prelude
     new ApplicativeSyntax.OpsA(a)
 
   // ApplySyntax
-  implicit def PapplyOps[F[_], A](fa: F[A])(
-      implicit F: Apply[F]): ApplySyntax.Ops[F, A] =
+  implicit def PapplyOps[F[_], A](
+    fa: F[A]
+  )(implicit F: Apply[F]): ApplySyntax.Ops[F, A] =
     new ApplySyntax.Ops(fa)
 
   // BindSyntax
-  implicit def PbindOps[M[_], A](ma: M[A])(
-      implicit M: Bind[M]): BindSyntax.Ops[M, A] =
+  implicit def PbindOps[M[_], A](
+    ma: M[A]
+  )(implicit M: Bind[M]): BindSyntax.Ops[M, A] =
     new BindSyntax.Ops(ma)
 
   // ComposeSyntax
-  implicit def PcomposeOps[P[_, _], A, B](pab: P[A, B])(
-      implicit P: Compose[P]): ComposeSyntax.Ops[P, A, B] =
+  implicit def PcomposeOps[P[_, _], A, B](
+    pab: P[A, B]
+  )(implicit P: Compose[P]): ComposeSyntax.Ops[P, A, B] =
     new ComposeSyntax.Ops(pab)
 
   // FunctorSyntax
-  implicit def PfunctorOps[F[_], A](fa: F[A])(
-      implicit F: Functor[F]): FunctorSyntax.Ops[F, A] =
+  implicit def PfunctorOps[F[_], A](
+    fa: F[A]
+  )(implicit F: Functor[F]): FunctorSyntax.Ops[F, A] =
     new FunctorSyntax.Ops(fa)
 
   // MaybeSyntax
@@ -75,19 +80,22 @@ trait Prelude
     def asMaybe: Maybe[A] = Maybe.fromOption(oa)
   }
 
-  implicit def CobindOps[F[_], A](fa: F[A])(
-      implicit F: Cobind[F]): CobindSyntax.Ops[F, A] =
+  implicit def CobindOps[F[_], A](
+    fa: F[A]
+  )(implicit F: Cobind[F]): CobindSyntax.Ops[F, A] =
     new CobindSyntax.Ops(fa)
 
-  implicit def ComonadOps[F[_], A](fa: F[A])(
-      implicit F: Comonad[F]): ComonadSyntax.Ops[F, A] =
+  implicit def ComonadOps[F[_], A](
+    fa: F[A]
+  )(implicit F: Comonad[F]): ComonadSyntax.Ops[F, A] =
     new ComonadSyntax.Ops(fa)
 
   implicit def ShowOps[A](a: A)(implicit A: Show[A]): ShowSyntax.Ops[A] =
     new ShowSyntax.Ops[A](a)(A)
 
-  implicit def SemigroupOps[A](a: A)(
-      implicit A: Semigroup[A]): SemigroupSyntax.OpsA[A] =
+  implicit def SemigroupOps[A](
+    a: A
+  )(implicit A: Semigroup[A]): SemigroupSyntax.OpsA[A] =
     new SemigroupSyntax.OpsA[A](a)
 
   // Base Data

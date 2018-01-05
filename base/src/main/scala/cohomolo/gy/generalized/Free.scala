@@ -1,4 +1,5 @@
 package cohomolo.gy
+
 package generalized
 
 import prelude.leibniz.Disjunction.\/

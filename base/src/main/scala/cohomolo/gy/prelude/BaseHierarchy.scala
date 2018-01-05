@@ -5,6 +5,7 @@ import cohomolo.gy.prelude.typeclass._
 class BaseHierarchy extends BaseHierarchy.BH0
 
 object BaseHierarchy {
+
   trait BH0 extends BH1 {
     implicit def monadBind[M[_]](implicit M: Monad[M]): Bind[M] = M.bind
     implicit def monadApplicative[M[_]](implicit M: Monad[M]): Applicative[M] =
@@ -29,7 +30,8 @@ object BaseHierarchy {
     implicit def applicativeApply[M[_]](implicit M: Applicative[M]): Apply[M] =
       M.apply
     implicit def applicativeFunctor[M[_]](
-        implicit M: Applicative[M]): Functor[M] = M.apply.functor
+      implicit M: Applicative[M]
+    ): Functor[M] = M.apply.functor
   }
 
   trait BH3 {

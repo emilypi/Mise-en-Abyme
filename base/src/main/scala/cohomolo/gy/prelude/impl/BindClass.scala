@@ -1,7 +1,7 @@
 package cohomolo.gy.prelude.impl
 
 import cohomolo.gy.prelude._
-import cohomolo.gy.prelude.typeclass.{Apply, Bind, Functor}
+import cohomolo.gy.prelude.typeclass.{ Apply, Bind, Functor }
 
 trait BindClass[M[_]] extends Bind[M] with ApplyClass[M] {
   final def bind: Bind[M] = this
@@ -18,6 +18,7 @@ object BindClass {
     override def bind[A, B](ma: M[A])(f: A => M[B]): M[B]
     override def join[A](ma: M[M[A]]): M[A] = bind(ma)(a => a)
   }
+
   trait Flatten[M[_]] extends Alt[Flatten[M]] { self: Bind[M] =>
     override def join[A](ma: M[M[A]]): M[A]
     override def bind[A, B](ma: M[A])(f: (A) => M[B]): M[B] =

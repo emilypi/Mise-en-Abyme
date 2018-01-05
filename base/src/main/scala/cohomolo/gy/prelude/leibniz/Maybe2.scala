@@ -1,5 +1,7 @@
 package cohomolo.gy
+
 package prelude
+
 package leibniz
 
 import typeclass.Show
@@ -11,7 +13,7 @@ sealed trait Maybe2Module {
     */
   type Maybe2[A, B]
 
-  def just2[A, B](a: => A, b: => B): Maybe2[A, B]
+  def just2[A, B](a: =>A, b: =>B): Maybe2[A, B]
   def empty2[A, B]: Maybe2[A, B]
 
 //  implicit def isCovariant_1[B]: IsCovariant[Maybe2[?, B]]
@@ -19,9 +21,11 @@ sealed trait Maybe2Module {
   implicit def show[A: Show, B: Show]: Show[Maybe2[A, B]]
 
   object Just2 {
+
     def unapply[A, B](m: Maybe2[A, B]): Just2Extractor[A, B] =
       new Just2Extractor(toOption2(m))
   }
+
   object Empty2 {
     def unapply[A, B](m: Maybe2[A, B]): Boolean = toOption2(m).isEmpty
   }
@@ -31,8 +35,8 @@ sealed trait Maybe2Module {
 }
 
 final class Just2Extractor[A, B] private[leibniz] (
-    private val value: Option2[A, B])
-    extends AnyVal {
+  private val value: Option2[A, B]
+) extends AnyVal {
   def isEmpty: Boolean = value.isEmpty
   def get: Just2Extractor[A, B] = this
   def _1: A = value._1
@@ -42,7 +46,7 @@ final class Just2Extractor[A, B] private[leibniz] (
 private[leibniz] object Maybe2Impl extends Maybe2Module {
   type Maybe2[A, B] = Option2[A, B]
 
-  def just2[A, B](a: => A, b: => B): Maybe2[A, B] = Some2(a, b)
+  def just2[A, B](a: =>A, b: =>B): Maybe2[A, B] = Some2(a, b)
   def empty2[A, B]: Maybe2[A, B] = None2
 
 //  implicit def isCovariant_1[B]: IsCovariant[Maybe2[?, B]] = IsCovariant.scalaCovariant[Option2[+?, B]]
@@ -50,7 +54,7 @@ private[leibniz] object Maybe2Impl extends Maybe2Module {
 
   implicit def show[A, B](implicit A: Show[A], B: Show[B]): Show[Maybe2[A, B]] = {
     case Some2(_1, _2) => s"Just2(${A.show(_1)}, ${B.show(_2)})"
-    case None2         => "Empty2"
+    case None2 => "Empty2"
   }
 
   private[leibniz] def fromOption2[A, B](o: Option2[A, B]): Maybe2[A, B] = o

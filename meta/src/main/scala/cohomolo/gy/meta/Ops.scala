@@ -59,8 +59,10 @@ class Ops(val c: blackbox.Context) {
       case Apply(Apply(TypeApply(_, _), List(x)), List(ev)) =>
         (ev, c.macroApplication.symbol.name.toTermName, x)
       case t =>
-        c.abort(c.enclosingPosition,
-                s"Cannot extract subject of operation (tree = $t)")
+        c.abort(
+          c.enclosingPosition,
+          s"Cannot extract subject of operation (tree = $t)"
+        )
     }
 }
 
@@ -77,8 +79,10 @@ class IdOps(val c: blackbox.Context) {
     c.prefix.tree match {
       case Apply(TypeApply(_, _), List(lhs)) => lhs
       case t =>
-        c.abort(c.enclosingPosition,
-                s"Cannot extract subject of operation (tree = $t)")
+        c.abort(
+          c.enclosingPosition,
+          s"Cannot extract subject of operation (tree = $t)"
+        )
     }
 
   private lazy val name =

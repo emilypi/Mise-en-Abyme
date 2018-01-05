@@ -1,5 +1,7 @@
 package cohomolo.gy
+
 package prelude
+
 package typeclass
 
 import cohomolo.gy.prelude.functions.BindFunctions

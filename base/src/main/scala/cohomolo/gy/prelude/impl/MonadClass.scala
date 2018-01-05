@@ -1,7 +1,7 @@
 package cohomolo.gy.prelude.impl
 
 import cohomolo.gy.prelude.impl.BindClass._
-import cohomolo.gy.prelude.typeclass.{Applicative, Bind, Functor, Monad}
+import cohomolo.gy.prelude.typeclass.{ Applicative, Bind, Functor, Monad }
 
 trait MonadClass[M[_]]
     extends Monad[M]

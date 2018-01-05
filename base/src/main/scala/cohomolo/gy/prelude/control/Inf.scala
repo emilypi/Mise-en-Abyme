@@ -3,6 +3,7 @@ package cohomolo.gy.prelude.control
 sealed abstract class Bool
 final class True private () extends Bool
 final class False private () extends Bool
+
 object Bool {
   sealed abstract class Value[B <: Bool]
   implicit object TrueValue extends Value[True]
@@ -12,8 +13,9 @@ object Bool {
 final class Inf[+A] private (thunk: () => A) {
   lazy val force: A = thunk()
 }
+
 object Inf {
-  def apply[A](a: => A): Inf[A] = new Inf(() => a)
+  def apply[A](a: =>A): Inf[A] = new Inf(() => a)
 }
 
 sealed abstract class MaybeInf[B <: Bool, A] {
@@ -25,13 +27,15 @@ final case class Inductive[A](value: A) extends MaybeInf[True, A] {
 final case class Coinductive[A](thunk: Inf[A]) extends MaybeInf[False, A] {
   def force: A = thunk.force
 }
+
 object MaybeInf {
   def inductive[A](a: A): MaybeInf[True, A] = Inductive(a)
   def coinductive[A](a: Inf[A]): MaybeInf[False, A] = Coinductive(a)
 
-  def delay[B <: Bool, A](value: => A)(
-      implicit B: Bool.Value[B]): MaybeInf[B, A] = B match {
-    case Bool.TrueValue  => Inductive(value)
+  def delay[B <: Bool, A](
+    value: =>A
+  )(implicit B: Bool.Value[B]): MaybeInf[B, A] = B match {
+    case Bool.TrueValue => Inductive(value)
     case Bool.FalseValue => Coinductive(Inf(value))
   }
 }
